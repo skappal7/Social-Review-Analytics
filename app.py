@@ -30,6 +30,12 @@ st.markdown(
     .sidebar .sidebar-content img {
         border-radius: 50%;
     }
+    .css-18e3th9 {
+        font-family: 'Poppins', sans-serif;
+    }
+    .css-1avcm0n {
+        font-family: 'Poppins', sans-serif;
+    }
     </style>
     """,
     unsafe_allow_html=True
@@ -119,31 +125,23 @@ def app2():
         # Allow the user to download the labeled and categorized reviews
         download_csv(reviews_df, 'labeled_categorized_reviews.csv')
 
-        # Visualization: Label Distribution
+        # Visualization: Label Distribution in Tabulated Form
         label_counts = reviews_df['Label'].value_counts().reset_index()
         label_counts.columns = ['Label', 'Count']
-        chart_label = alt.Chart(label_counts).mark_bar().encode(
-            x='Label',
-            y='Count',
-            color='Label',
-            tooltip=['Label', 'Count']
-        ).properties(
-            title='Label Distribution'
-        )
-        st.altair_chart(chart_label, use_container_width=True)
+        label_counts['Percentage'] = (label_counts['Count'] / label_counts['Count'].sum()) * 100
+        label_counts['Bar'] = label_counts['Count'].apply(lambda x: '█' * int(x / label_counts['Count'].max() * 100))
+        
+        st.write("### Label Distribution")
+        st.write(label_counts[['Label', 'Count', 'Percentage', 'Bar']])
 
-        # Visualization: Category Distribution
+        # Visualization: Category Distribution in Tabulated Form
         category_counts = reviews_df['Category'].value_counts().reset_index()
         category_counts.columns = ['Category', 'Count']
-        chart_category = alt.Chart(category_counts).mark_bar().encode(
-            x='Category',
-            y='Count',
-            color='Category',
-            tooltip=['Category', 'Count']
-        ).properties(
-            title='Category Distribution'
-        )
-        st.altair_chart(chart_category, use_container_width=True)
+        category_counts['Percentage'] = (category_counts['Count'] / category_counts['Count'].sum()) * 100
+        category_counts['Bar'] = category_counts['Count'].apply(lambda x: '█' * int(x / category_counts['Count'].max() * 100))
+        
+        st.write("### Category Distribution")
+        st.write(category_counts[['Category', 'Count', 'Percentage', 'Bar']])
 
     else:
         st.write("No review data available. Please scrape reviews first.")
