@@ -131,18 +131,18 @@ def app2():
         label_counts.columns = ['Label', 'Count']
         label_counts['Percentage'] = (label_counts['Count'] / label_counts['Count'].sum() * 100).round(1).astype(str) + '%'
         label_counts['Bar'] = label_counts['Count'].apply(lambda x: f"<div style='width: {x/label_counts['Count'].max() * 100}px; background-color: #07B1FC;'>&nbsp;</div>")
-        
+
         st.write("### Label Distribution")
-        st.write(label_counts[['Label', 'Count', 'Percentage', 'Bar']], unsafe_allow_html=True)
+        st.markdown(label_counts[['Label', 'Count', 'Percentage', 'Bar']].to_html(index=False, escape=False), unsafe_allow_html=True)
 
         # Visualization: Category Distribution in Tabulated Form
         category_counts = reviews_df['Category'].value_counts().reset_index()
         category_counts.columns = ['Category', 'Count']
         category_counts['Percentage'] = (category_counts['Count'] / category_counts['Count'].sum() * 100).round(1).astype(str) + '%'
         category_counts['Bar'] = category_counts['Count'].apply(lambda x: f"<div style='width: {x/category_counts['Count'].max() * 100}px; background-color: #07B1FC;'>&nbsp;</div>")
-        
+
         st.write("### Category Distribution")
-        st.write(category_counts[['Category', 'Count', 'Percentage', 'Bar']], unsafe_allow_html=True)
+        st.markdown(category_counts[['Category', 'Count', 'Percentage', 'Bar']].to_html(index=False, escape=False), unsafe_allow_html=True)
 
     else:
         st.write("No review data available. Please scrape reviews first.")
