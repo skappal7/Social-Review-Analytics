@@ -36,8 +36,8 @@ st.markdown(
 )
 
 # Add logos
-st.image('path/to/logo.png', width=100)
-st.sidebar.image('path/to/logo.png', width=100)
+st.image('logo.png', width=100)  # Ensure logo.png is in the same directory as your script
+st.sidebar.image('logo.png', width=100)  # Ensure logo.png is in the same directory as your script
 
 # Initialize session state
 if 'logged_in' not in st.session_state:
