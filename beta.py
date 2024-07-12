@@ -482,12 +482,12 @@ def categorize_review(review):
             return "Billing and Payments"
 
     # Check for technical support-related keywords
-    for keyword in technical support_keywords:
+    for keyword in technical_support_keywords:
         if keyword in review:
             return "Technical Support"
 
     # Check for account management-related keywords
-    for keyword in account management_keywords:
+    for keyword in account_management_keywords:
         if keyword in review:
             return "Account Management"
 
