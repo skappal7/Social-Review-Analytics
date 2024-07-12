@@ -358,8 +358,8 @@ def app4():
 
         function update(source) {
 
-          var treeData = treemap(root);
-
+          var treeData = {tree_json};
+          
           var nodes = treeData.descendants(),
               links = treeData.descendants().slice(1);
 
