@@ -1,0 +1,8 @@
+streamlit
+pandas
+google-play-scraper
+wordcloud
+matplotlib
+nltk
+altair
+textblob
