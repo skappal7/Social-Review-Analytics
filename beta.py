@@ -15,6 +15,8 @@ from textblob import TextBlob
 import nltk
 import json
 
+from word_tree_component import word_tree
+
 nltk.download('stopwords')
 
 # Custom CSS for branding and logo placement
@@ -302,17 +304,9 @@ def app4():
             return tree
 
         tree_data = prepare_word_tree_data(data)
-        tree_json = json.dumps(tree_data)
 
-        # Read the HTML template
-        with open('word_tree.html', 'r') as file:
-            html_template = file.read()
-
-        # Embed the tree_json into the HTML template
-        d3_html = html_template.replace('var treeData = {};', f'var treeData = {tree_json};')
-
-        # Embed the HTML with D3.js into Streamlit
-        st.components.v1.html(d3_html, height=600)
+        # Render the word tree component
+        word_tree(tree_data)
 
     else:
         st.write("No labeled data available. Please label reviews first.")
